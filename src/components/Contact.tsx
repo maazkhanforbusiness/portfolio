@@ -109,8 +109,12 @@ export function Contact() {
           <div className="contact-direct">
             <p>{contactSection.direct}</p>
             <a href={`mailto:${site.email}`}>{site.email}</a>
-            <a href={`tel:${site.phoneTel}`}>{site.phoneDisplay}</a>
-            <a href={site.whatsappUrl} target="_blank" rel="noopener noreferrer">
+            <a
+              className="btn btn-dark btn-sm"
+              href={site.whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               WhatsApp
             </a>
             <ul className="social-list">

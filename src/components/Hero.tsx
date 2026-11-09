@@ -59,8 +59,13 @@ export function Hero() {
         <div className="hero-aside-contact">
           <p className="hero-aside-contact-label">{hero.asideContact}</p>
           <a href={`mailto:${site.email}`}>{site.email}</a>
-          <a href={site.whatsappUrl} target="_blank" rel="noopener noreferrer">
-            WhatsApp {site.phoneDisplay}
+          <a
+            className="btn btn-dark btn-sm hero-whatsapp"
+            href={site.whatsappUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            WhatsApp
           </a>
         </div>
       </motion.aside>

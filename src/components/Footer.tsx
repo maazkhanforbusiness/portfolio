@@ -11,7 +11,9 @@ export function Footer() {
         </div>
         <div className="footer-links">
           <a href={`mailto:${site.email}`}>{site.email}</a>
-          <a href={`tel:${site.phoneTel}`}>{site.phoneDisplay}</a>
+          <a href={site.whatsappUrl} target="_blank" rel="noopener noreferrer">
+            WhatsApp
+          </a>
           {site.socials.map((s) =>
             s.href ? (
               <a key={s.id} href={s.href} target="_blank" rel="noopener noreferrer">

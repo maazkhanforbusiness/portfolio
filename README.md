@@ -28,4 +28,4 @@ Destination email for Formspree: `maazkhanforbusiness@gmail.com`
 ## Contact
 
 - Email: maazkhanforbusiness@gmail.com
-- Phone / WhatsApp: +91 97600 03398 (`https://wa.me/919760003398`)
+- WhatsApp: button/link to `https://wa.me/919760003398` (number not shown on the site)

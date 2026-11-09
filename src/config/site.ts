@@ -9,8 +9,6 @@ export const site = {
   name: 'Maaz Khan',
   title: 'Maaz Khan — Video Editor | Social Media Manager | Creative Professional',
   email: 'maazkhanforbusiness@gmail.com',
-  phoneDisplay: '+91 97600 03398',
-  phoneTel: '+919760003398',
   whatsappUrl: 'https://wa.me/919760003398',
 
   showreel: {

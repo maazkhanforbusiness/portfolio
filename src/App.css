@@ -309,6 +309,16 @@
   color: var(--accent);
 }
 
+.hero-aside-contact .hero-whatsapp {
+  justify-self: start;
+  margin-top: 0.35rem;
+  color: #fff;
+}
+
+.hero-aside-contact .hero-whatsapp:hover {
+  color: #fff;
+}
+
 .hero-scroll {
   position: absolute;
   left: var(--pad);
