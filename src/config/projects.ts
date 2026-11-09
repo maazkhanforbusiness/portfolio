@@ -6,13 +6,11 @@
  * Do not invent real client names or footage URLs.
  */
 export type ProjectCategory =
-  | 'Talking Head Videos'
-  | 'Real Estate Films'
-  | 'Podcast Editing'
-  | 'Vlogs & Lifestyle'
-  | 'Social Media Reels'
-  | 'Commercial & Brand Films'
-  | 'AI Promotional Ads'
+  | 'Talking Head'
+  | 'Real Estate'
+  | 'AI Promo'
+  | 'Long Format'
+  | 'Short Format'
 
 export type Project = {
   id: string
@@ -32,9 +30,8 @@ export const projects: Project[] = [
   {
     id: 'talking-head-01',
     title: 'Talking Head Series',
-    category: 'Talking Head Videos',
-    description:
-      'Placeholder for a talking-head edit — jump cuts, captions, and paced storytelling.',
+    category: 'Talking Head',
+    description: 'Jump cuts, dynamic captions, and paced storytelling for on-camera creators.',
     year: '—',
     contribution: 'Editing, captions, sound design',
     tools: ['Adobe Premiere Pro', 'Adobe Audition'],
@@ -44,9 +41,8 @@ export const projects: Project[] = [
   {
     id: 'real-estate-01',
     title: 'Property Showcase',
-    category: 'Real Estate Films',
-    description:
-      'Placeholder for a cinematic property walkthrough with colour and motion polish.',
+    category: 'Real Estate',
+    description: 'Cinematic walkthroughs with colour grade, transitions, and spatial pacing.',
     year: '—',
     contribution: 'Edit, colour grading, transitions',
     tools: ['Adobe Premiere Pro', 'Adobe After Effects'],
@@ -54,11 +50,21 @@ export const projects: Project[] = [
     thumbnail: null,
   },
   {
-    id: 'podcast-01',
+    id: 'ai-promo-01',
+    title: 'AI Promotional Spot',
+    category: 'AI Promo',
+    description: 'AI-assisted promotional sequences with motion graphics and commercial rhythm.',
+    year: '—',
+    contribution: 'Edit, motion graphics, storytelling',
+    tools: ['Adobe After Effects', 'Adobe Premiere Pro'],
+    videoUrl: null,
+    thumbnail: null,
+  },
+  {
+    id: 'long-format-01',
     title: 'Podcast Episode Cut',
-    category: 'Podcast Editing',
-    description:
-      'Placeholder for a multi-camera podcast edit with audio cleanup and highlights.',
+    category: 'Long Format',
+    description: 'Multi-camera long-form edit with audio cleanup, captions, and highlight moments.',
     year: '—',
     contribution: 'Multi-cam edit, audio, captions',
     tools: ['Adobe Premiere Pro', 'Adobe Audition'],
@@ -66,35 +72,10 @@ export const projects: Project[] = [
     thumbnail: null,
   },
   {
-    id: 'vlog-01',
-    title: 'Lifestyle Vlog',
-    category: 'Vlogs & Lifestyle',
-    description:
-      'Placeholder for a story-driven lifestyle cut with music sync and smooth transitions.',
-    year: '—',
-    contribution: 'Story edit, colour, sound design',
-    tools: ['Adobe Premiere Pro', 'DaVinci Resolve'],
-    videoUrl: null,
-    thumbnail: null,
-  },
-  {
-    id: 'reels-01',
-    title: 'Social Reels Pack',
-    category: 'Social Media Reels',
-    description:
-      'Placeholder for vertical short-form edits with hooks, captions, and retention pacing.',
-    year: '—',
-    contribution: 'Short-form edit, captions, hooks',
-    tools: ['Adobe Premiere Pro', 'CapCut'],
-    videoUrl: null,
-    thumbnail: null,
-  },
-  {
-    id: 'brand-01',
-    title: 'Brand Film',
-    category: 'Commercial & Brand Films',
-    description:
-      'Placeholder for a brand storytelling piece with motion graphics and sound design.',
+    id: 'long-format-02',
+    title: 'Brand Story Film',
+    category: 'Long Format',
+    description: 'Brand storytelling with motion graphics, sound design, and cinematic pacing.',
     year: '—',
     contribution: 'Cinematic edit, motion, sound',
     tools: ['Adobe Premiere Pro', 'Adobe After Effects'],
@@ -102,14 +83,24 @@ export const projects: Project[] = [
     thumbnail: null,
   },
   {
-    id: 'ai-ad-01',
-    title: 'AI Promotional Spot',
-    category: 'AI Promotional Ads',
-    description:
-      'Placeholder for an AI-assisted promotional sequence with motion and commercial storytelling.',
+    id: 'short-format-01',
+    title: 'Social Reels Pack',
+    category: 'Short Format',
+    description: 'Vertical short-form cuts built around hooks, captions, and retention pacing.',
     year: '—',
-    contribution: 'Edit, motion graphics, storytelling',
-    tools: ['Adobe After Effects', 'Adobe Premiere Pro'],
+    contribution: 'Short-form edit, captions, hooks',
+    tools: ['Adobe Premiere Pro', 'CapCut'],
+    videoUrl: null,
+    thumbnail: null,
+  },
+  {
+    id: 'short-format-02',
+    title: 'Lifestyle Cutdowns',
+    category: 'Short Format',
+    description: 'Story-driven short cuts with music sync, colour, and smooth transitions.',
+    year: '—',
+    contribution: 'Story edit, colour, sound design',
+    tools: ['Adobe Premiere Pro', 'DaVinci Resolve'],
     videoUrl: null,
     thumbnail: null,
   },

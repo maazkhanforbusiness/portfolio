@@ -1,14 +1,14 @@
 import { useMemo, useState } from 'react'
 import { workSection } from '../config/content'
-import { projects, type Project } from '../config/projects'
+import { projects, type Project, type ProjectCategory } from '../config/projects'
 import { VideoPlayer } from './VideoPlayer'
 
 export function Work() {
-  const [filter, setFilter] = useState<(typeof workSection.categories)[number]>('All')
+  const [filter, setFilter] = useState<ProjectCategory | null>(null)
   const [active, setActive] = useState<Project | null>(null)
 
   const filtered = useMemo(() => {
-    if (filter === 'All') return projects
+    if (!filter) return projects
     return projects.filter((p) => p.category === filter)
   }, [filter])
 
@@ -18,7 +18,6 @@ export function Work() {
         <header className="section-head">
           <p className="eyebrow">{workSection.eyebrow}</p>
           <h2 id="work-title">{workSection.title}</h2>
-          <p className="section-body">{workSection.body}</p>
         </header>
 
         <div className="work-filters" role="tablist" aria-label="Project categories">
@@ -29,7 +28,7 @@ export function Work() {
               role="tab"
               aria-selected={filter === cat}
               className={filter === cat ? 'is-active' : ''}
-              onClick={() => setFilter(cat)}
+              onClick={() => setFilter((current) => (current === cat ? null : cat))}
             >
               {cat}
             </button>
@@ -37,11 +36,8 @@ export function Work() {
         </div>
 
         <ul className="work-grid">
-          {filtered.map((project, i) => (
-            <li
-              key={project.id}
-              className={`work-item ${i % 3 === 0 ? 'span-wide' : ''} ${i % 5 === 2 ? 'offset' : ''}`}
-            >
+          {filtered.map((project) => (
+            <li key={project.id} className="work-item">
               <button
                 type="button"
                 className="work-card"
@@ -61,7 +57,7 @@ export function Work() {
                   <span className="work-cat">{project.category}</span>
                   <h3>{project.title}</h3>
                   <p>{project.description}</p>
-                  <span className="work-cta">Watch Project</span>
+                  <span className="work-cta">{project.videoUrl ? 'Watch Project' : 'View details'}</span>
                 </div>
               </button>
             </li>

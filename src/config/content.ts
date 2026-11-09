@@ -31,17 +31,13 @@ export const showreelSection = {
 
 export const workSection = {
   eyebrow: 'Selected Work',
-  title: 'Projects worth pausing for.',
-  body: 'Placeholder projects until real cuts are ready. Edit titles, media, and details in one config file.',
+  title: 'Selected cuts across formats.',
   categories: [
-    'All',
-    'Talking Head Videos',
-    'Real Estate Films',
-    'Podcast Editing',
-    'Vlogs & Lifestyle',
-    'Social Media Reels',
-    'Commercial & Brand Films',
-    'AI Promotional Ads',
+    'Talking Head',
+    'Real Estate',
+    'AI Promo',
+    'Long Format',
+    'Short Format',
   ] as const,
 }
 
