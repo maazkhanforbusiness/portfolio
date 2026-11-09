@@ -29,14 +29,14 @@ export type Project = {
 export const projects: Project[] = [
   {
     id: 'talking-head-01',
-    title: 'Talking Head Series',
+    title: 'Talking Head',
     category: 'Talking Head',
     description: 'Jump cuts, dynamic captions, and paced storytelling for on-camera creators.',
     year: '—',
     contribution: 'Editing, captions, sound design',
     tools: ['Adobe Premiere Pro', 'Adobe Audition'],
-    videoUrl: null,
-    thumbnail: null,
+    videoUrl: 'https://youtu.be/9xTF_0iLPbo',
+    thumbnail: 'https://i.ytimg.com/vi/9xTF_0iLPbo/hqdefault.jpg',
   },
   {
     id: 'real-estate-01',
