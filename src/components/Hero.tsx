@@ -1,5 +1,6 @@
 import { motion, type Transition } from 'framer-motion'
 import { hero } from '../config/content'
+import { site } from '../config/site'
 import { usePrefersReducedMotion } from '../hooks/usePrefersReducedMotion'
 
 const ease: Transition['ease'] = [0.22, 1, 0.36, 1]
@@ -48,14 +49,21 @@ export function Hero() {
         </motion.p>
       </div>
 
-      <motion.div className="hero-visual" aria-hidden="true" {...fade(0.16)}>
-        <div className="hero-frame">
-          <div className="hero-frame-inner">
-            <span className="hero-frame-play" />
-            <span className="hero-frame-caption">Showreel preview</span>
-          </div>
+      <motion.aside className="hero-aside" aria-label="About and contact" {...fade(0.2)}>
+        <p className="hero-aside-eyebrow">{hero.asideEyebrow}</p>
+        {hero.aside.map((paragraph) => (
+          <p key={paragraph.slice(0, 48)} className="hero-aside-copy">
+            {paragraph}
+          </p>
+        ))}
+        <div className="hero-aside-contact">
+          <p className="hero-aside-contact-label">{hero.asideContact}</p>
+          <a href={`mailto:${site.email}`}>{site.email}</a>
+          <a href={site.whatsappUrl} target="_blank" rel="noopener noreferrer">
+            WhatsApp {site.phoneDisplay}
+          </a>
         </div>
-      </motion.div>
+      </motion.aside>
 
       <a className="hero-scroll" href="#showreel">
         <span>{hero.scroll}</span>

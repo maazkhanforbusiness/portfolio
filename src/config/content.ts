@@ -20,6 +20,13 @@ export const hero = {
   ctaContact: "Let's Work Together",
   availability: 'Available for select projects',
   scroll: 'Scroll',
+  asideEyebrow: 'About',
+  aside: [
+    "I'm Maaz Khan, a video editor and social media professional with approximately two years of experience working across digital content, YouTube, real estate, and freelance projects.",
+    'My work combines storytelling, editing, motion graphics, colour correction, and sound design to create videos that communicate ideas and keep audiences engaged.',
+    'I also have experience in social media management and graphic design, giving me a broader understanding of how content is created, presented, and distributed.',
+  ],
+  asideContact: 'Get in touch',
 }
 
 export const showreelSection = {

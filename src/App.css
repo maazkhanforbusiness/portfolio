@@ -259,53 +259,54 @@
   background: #2f9e6b;
 }
 
-.hero-visual {
-  min-height: min(58vh, 540px);
-  align-self: stretch;
+.hero-aside {
+  align-self: center;
+  max-width: 28rem;
+  padding: clamp(1.25rem, 3vh, 2rem) 0 clamp(1.25rem, 3vh, 2rem) clamp(1.25rem, 3vw, 2rem);
+  border-left: 1px solid var(--line);
 }
 
-.hero-frame {
-  height: 100%;
-  background: var(--ink-deep);
+.hero-aside-eyebrow {
+  margin: 0 0 1rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.hero-aside-copy {
+  margin: 0 0 1rem;
+  color: var(--muted);
+  font-size: 0.98rem;
+  line-height: 1.65;
+}
+
+.hero-aside-copy:last-of-type {
+  margin-bottom: 1.5rem;
+}
+
+.hero-aside-contact {
   display: grid;
-  place-items: center;
+  gap: 0.45rem;
 }
 
-.hero-frame-inner {
-  width: min(78%, 22rem);
-  aspect-ratio: 16 / 10;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  display: grid;
-  place-content: center;
-  gap: 0.85rem;
-  text-align: center;
-  color: rgba(243, 242, 238, 0.7);
-}
-
-.hero-frame-play {
-  width: 3rem;
-  height: 3rem;
-  margin-inline: auto;
-  border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.35);
-  position: relative;
-}
-
-.hero-frame-play::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 54%;
-  transform: translate(-50%, -50%);
-  border-style: solid;
-  border-width: 7px 0 7px 12px;
-  border-color: transparent transparent transparent rgba(255, 255, 255, 0.85);
-}
-
-.hero-frame-caption {
+.hero-aside-contact-label {
+  margin: 0 0 0.15rem;
   font-size: 0.72rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
+  color: var(--ink);
+}
+
+.hero-aside-contact a {
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--ink);
+}
+
+.hero-aside-contact a:hover {
+  color: var(--accent);
 }
 
 .hero-scroll {
@@ -1035,11 +1036,12 @@
     max-width: none;
   }
 
-  .hero-visual {
-    order: -1;
-    min-height: 38vh;
-    margin-inline: calc(var(--pad) * -1);
-    width: calc(100% + var(--pad) * 2);
+  .hero-aside {
+    order: 1;
+    max-width: none;
+    padding: 1.5rem 0 0;
+    border-left: 0;
+    border-top: 1px solid var(--line);
   }
 
   .hero-scroll {
