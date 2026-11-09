@@ -10,13 +10,11 @@ function buildInquiryMessage({
   fullName,
   phone,
   email,
-  projectType,
   details,
 }: {
   fullName: string
   phone: string
   email: string
-  projectType: string
   details: string
 }) {
   const lines = [
@@ -25,10 +23,9 @@ function buildInquiryMessage({
     `Name: ${fullName}`,
     phone ? `Phone: ${phone}` : null,
     email ? `Email: ${email}` : null,
-    `Project type: ${projectType}`,
-    '',
-    'Project details:',
-    details,
+    details ? '' : null,
+    details ? 'Project details:' : null,
+    details || null,
   ].filter((line): line is string => line !== null)
 
   return lines.join('\n')
@@ -38,7 +35,6 @@ export function Contact() {
   const [fullName, setFullName] = useState('')
   const [phone, setPhone] = useState('')
   const [email, setEmail] = useState('')
-  const [projectType, setProjectType] = useState('')
   const [details, setDetails] = useState('')
   const [status, setStatus] = useState<Status>('idle')
   const [message, setMessage] = useState('')
@@ -57,10 +53,9 @@ export function Contact() {
     const name = fullName.trim()
     const phoneValue = phone.trim()
     const emailValue = email.trim()
-    const type = projectType.trim()
     const detailText = details.trim()
 
-    if (!name || !type || !detailText) {
+    if (!name) {
       setStatus('error')
       setMessage(contactSection.form.required)
       return
@@ -82,13 +77,12 @@ export function Contact() {
       fullName: name,
       phone: phoneValue,
       email: emailValue,
-      projectType: type,
       details: detailText,
     })
 
     const whatsappUrl = `${site.whatsappUrl}?text=${encodeURIComponent(body)}`
     const mailtoUrl = `mailto:${site.email}?subject=${encodeURIComponent(
-      `Portfolio inquiry — ${type}`,
+      'Portfolio inquiry',
     )}&body=${encodeURIComponent(body)}`
 
     window.open(whatsappUrl, '_blank', 'noopener,noreferrer')
@@ -173,34 +167,16 @@ export function Contact() {
             />
           </label>
           <p className="form-note full">{contactSection.form.contactNote}</p>
-          <label>
-            <span>
-              {contactSection.form.projectType} <em>*</em>
-            </span>
-            <select
-              name="projectType"
-              value={projectType}
-              onChange={(e) => setProjectType(e.target.value)}
-              required
-            >
-              <option value="">Select project type</option>
-              {contactSection.projectTypes.map((t) => (
-                <option key={t} value={t}>
-                  {t}
-                </option>
-              ))}
-            </select>
-          </label>
           <label className="full">
             <span>
-              {contactSection.form.details} <em>*</em>
+              {contactSection.form.details}{' '}
+              <small>({contactSection.form.optional})</small>
             </span>
             <textarea
               name="details"
               rows={5}
               value={details}
               onChange={(e) => setDetails(e.target.value)}
-              required
             />
           </label>
 

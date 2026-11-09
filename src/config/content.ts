@@ -254,16 +254,15 @@ export const contactSection = {
     phoneHint: 'Phone or email required',
     emailHint: 'Phone or email required',
     contactNote: 'Provide at least one: phone number or email.',
-    projectType: 'Project Type',
     details: 'Project Details',
+    optional: 'Optional',
     submit: 'Send Project Inquiry →',
     opened:
       'WhatsApp opened and your mail app opened with this inquiry. Send both from your device — nothing was delivered automatically from this site.',
-    required: 'Please complete all required fields.',
+    required: 'Please enter your full name.',
     contactRequired: 'Enter a phone number or an email address (at least one).',
     invalidEmail: 'Enter a valid email address.',
   },
-  projectTypes: ['One-time', 'Monthly', 'Long-term', 'Not sure'] as const,
   direct: 'Or reach me directly',
 }
 
