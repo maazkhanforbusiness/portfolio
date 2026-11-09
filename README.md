@@ -9,6 +9,10 @@ npm install
 npm run dev
 ```
 
+## GitHub Pages
+
+This repo is published from the `main` branch root. `npm run build` writes the Vite `dist` output into `index.html` + `assets/` (base `/portfolio/`) so Pages serves the production bundle, not `/src/main.tsx`. The Vite entry template is `index.source.html`.
+
 ## Configure
 
 | What | File |

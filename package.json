@@ -4,8 +4,10 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "predev": "cp index.source.html index.html",
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "prebuild": "cp index.source.html index.html",
+    "build": "tsc -b && vite build && bash scripts/sync-pages.sh",
     "lint": "oxlint",
     "preview": "vite preview"
   },
