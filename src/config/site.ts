@@ -1,7 +1,7 @@
 /**
  * Site settings — wire real assets here.
  *
- * Showreel: set `showreel.src` to an MP4/WebM URL (leave null until ready).
+ * Showreel: set `showreel.src` to a YouTube watch/share URL or an MP4/WebM URL.
  * Formspree: create a form for maazkhanforbusiness@gmail.com, then set
  * `formspreeEndpoint` or env `VITE_FORMSPREE_ENDPOINT` to
  * `https://formspree.io/f/xxxxxxxx`.
@@ -18,7 +18,7 @@ export const site = {
     (import.meta.env.VITE_FORMSPREE_ENDPOINT as string | undefined)?.trim() ||
     null,
   showreel: {
-    src: null as string | null,
+    src: 'https://youtu.be/o9yZh-4qEwo' as string | null,
     poster: null as string | null,
     title: 'Showreel',
   },

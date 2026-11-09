@@ -25,7 +25,7 @@ export const hero = {
 export const showreelSection = {
   eyebrow: 'Showreel',
   title: 'A cut of the work.',
-  body: 'Add a showreel file URL in the site config when ready. Until then, this player stays empty — no invented footage.',
+  body: 'A selection of recent edits across storytelling, pacing, and visual direction.',
   comingSoon: 'Showreel coming soon',
 }
 
