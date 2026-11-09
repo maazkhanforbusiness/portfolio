@@ -1,101 +1,107 @@
 import { useEffect, useState, type FormEvent } from 'react'
-import { contactSection, servicesSection } from '../config/content'
+import { contactSection } from '../config/content'
 import { site } from '../config/site'
 
-type Status = 'idle' | 'loading' | 'success' | 'error' | 'unconfigured'
+type Status = 'idle' | 'opened' | 'error'
 
 const emailOk = (v: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)
 
+function buildInquiryMessage({
+  fullName,
+  phone,
+  email,
+  projectType,
+  details,
+}: {
+  fullName: string
+  phone: string
+  email: string
+  projectType: string
+  details: string
+}) {
+  const lines = [
+    'New portfolio inquiry',
+    '',
+    `Name: ${fullName}`,
+    phone ? `Phone: ${phone}` : null,
+    email ? `Email: ${email}` : null,
+    `Project type: ${projectType}`,
+    '',
+    'Project details:',
+    details,
+  ].filter((line): line is string => line !== null)
+
+  return lines.join('\n')
+}
+
 export function Contact() {
   const [fullName, setFullName] = useState('')
+  const [phone, setPhone] = useState('')
   const [email, setEmail] = useState('')
-  const [company, setCompany] = useState('')
-  const [service, setService] = useState('')
   const [projectType, setProjectType] = useState('')
-  const [budget, setBudget] = useState('')
   const [details, setDetails] = useState('')
-  const [references, setReferences] = useState('')
   const [status, setStatus] = useState<Status>('idle')
   const [message, setMessage] = useState('')
-  const [locked, setLocked] = useState(false)
 
   useEffect(() => {
     const preferred = sessionStorage.getItem('preferredService')
     if (preferred) {
-      setService(preferred)
+      setDetails((current) => current || `Interested in: ${preferred}\n\n`)
       sessionStorage.removeItem('preferredService')
     }
   }, [])
 
-  const onSubmit = async (e: FormEvent) => {
+  const onSubmit = (e: FormEvent) => {
     e.preventDefault()
-    if (locked || status === 'loading') return
 
-    if (!fullName.trim() || !email.trim() || !service || !projectType || !details.trim()) {
+    const name = fullName.trim()
+    const phoneValue = phone.trim()
+    const emailValue = email.trim()
+    const type = projectType.trim()
+    const detailText = details.trim()
+
+    if (!name || !type || !detailText) {
       setStatus('error')
       setMessage(contactSection.form.required)
       return
     }
-    if (!emailOk(email.trim())) {
+
+    if (!phoneValue && !emailValue) {
+      setStatus('error')
+      setMessage(contactSection.form.contactRequired)
+      return
+    }
+
+    if (emailValue && !emailOk(emailValue)) {
       setStatus('error')
       setMessage(contactSection.form.invalidEmail)
       return
     }
 
-    const endpoint = site.formspreeEndpoint
-    if (!endpoint) {
-      setStatus('unconfigured')
-      setMessage(contactSection.form.errorConfig)
-      return
-    }
+    const body = buildInquiryMessage({
+      fullName: name,
+      phone: phoneValue,
+      email: emailValue,
+      projectType: type,
+      details: detailText,
+    })
 
-    setStatus('loading')
-    setMessage('')
-    setLocked(true)
+    const whatsappUrl = `${site.whatsappUrl}?text=${encodeURIComponent(body)}`
+    const mailtoUrl = `mailto:${site.email}?subject=${encodeURIComponent(
+      `Portfolio inquiry — ${type}`,
+    )}&body=${encodeURIComponent(body)}`
 
-    try {
-      const res = await fetch(endpoint, {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          fullName: fullName.trim(),
-          email: email.trim(),
-          company: company.trim() || undefined,
-          service,
-          projectType,
-          budget: budget.trim() || undefined,
-          details: details.trim(),
-          references: references.trim() || undefined,
-          _replyto: email.trim(),
-          _subject: `Portfolio inquiry — ${service}`,
-        }),
-      })
+    window.open(whatsappUrl, '_blank', 'noopener,noreferrer')
 
-      if (!res.ok) {
-        setStatus('error')
-        setMessage(contactSection.form.errorGeneric)
-        setLocked(false)
-        return
-      }
+    const mailLink = document.createElement('a')
+    mailLink.href = mailtoUrl
+    mailLink.rel = 'noopener'
+    document.body.appendChild(mailLink)
+    mailLink.click()
+    mailLink.remove()
 
-      setStatus('success')
-      setMessage(contactSection.form.success)
-      setFullName('')
-      setEmail('')
-      setCompany('')
-      setService('')
-      setProjectType('')
-      setBudget('')
-      setDetails('')
-      setReferences('')
-    } catch {
-      setStatus('error')
-      setMessage(contactSection.form.errorGeneric)
-      setLocked(false)
-    }
+    setStatus('opened')
+    setMessage(contactSection.form.opened)
   }
 
   return (
@@ -132,7 +138,7 @@ export function Contact() {
         </header>
 
         <form className="contact-form" onSubmit={onSubmit} noValidate>
-          <label>
+          <label className="full">
             <span>
               {contactSection.form.fullName} <em>*</em>
             </span>
@@ -145,48 +151,28 @@ export function Contact() {
             />
           </label>
           <label>
-            <span>
-              {contactSection.form.email} <em>*</em>
-            </span>
+            <span>{contactSection.form.phone}</span>
+            <input
+              name="phone"
+              type="tel"
+              autoComplete="tel"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              placeholder={contactSection.form.phoneHint}
+            />
+          </label>
+          <label>
+            <span>{contactSection.form.email}</span>
             <input
               name="email"
               type="email"
               autoComplete="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              required
+              placeholder={contactSection.form.emailHint}
             />
           </label>
-          <label>
-            <span>
-              {contactSection.form.company}{' '}
-              <small>({contactSection.form.optional})</small>
-            </span>
-            <input
-              name="company"
-              autoComplete="organization"
-              value={company}
-              onChange={(e) => setCompany(e.target.value)}
-            />
-          </label>
-          <label>
-            <span>
-              {contactSection.form.service} <em>*</em>
-            </span>
-            <select
-              name="service"
-              value={service}
-              onChange={(e) => setService(e.target.value)}
-              required
-            >
-              <option value="">Select a service</option>
-              {servicesSection.items.map((s) => (
-                <option key={s.num} value={s.title}>
-                  {s.num}. {s.title}
-                </option>
-              ))}
-            </select>
-          </label>
+          <p className="form-note full">{contactSection.form.contactNote}</p>
           <label>
             <span>
               {contactSection.form.projectType} <em>*</em>
@@ -205,13 +191,6 @@ export function Contact() {
               ))}
             </select>
           </label>
-          <label>
-            <span>
-              {contactSection.form.budget}{' '}
-              <small>({contactSection.form.optional})</small>
-            </span>
-            <input name="budget" value={budget} onChange={(e) => setBudget(e.target.value)} />
-          </label>
           <label className="full">
             <span>
               {contactSection.form.details} <em>*</em>
@@ -224,32 +203,14 @@ export function Contact() {
               required
             />
           </label>
-          <label className="full">
-            <span>
-              {contactSection.form.references}{' '}
-              <small>({contactSection.form.optional})</small>
-            </span>
-            <input
-              name="references"
-              value={references}
-              onChange={(e) => setReferences(e.target.value)}
-              placeholder="https://"
-            />
-          </label>
 
           <div className="form-actions full">
-            <button
-              type="submit"
-              className="btn btn-dark"
-              disabled={status === 'loading' || (locked && status === 'success')}
-            >
-              {status === 'loading' ? contactSection.form.sending : contactSection.form.submit}
+            <button type="submit" className="btn btn-dark">
+              {contactSection.form.submit}
             </button>
             {message && (
               <p
-                className={`form-status ${
-                  status === 'success' ? 'ok' : status === 'unconfigured' ? 'warn' : 'err'
-                }`}
+                className={`form-status ${status === 'opened' ? 'ok' : 'err'}`}
                 role="status"
               >
                 {message}

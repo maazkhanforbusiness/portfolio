@@ -19,7 +19,7 @@ This repo is published from the `main` branch root. `npm run build` writes the V
 |------|------|
 | Showreel video / poster | `src/config/site.ts` → `showreel.src`, `showreel.poster` |
 | Projects / YouTube links | `src/config/projects.ts` |
-| Formspree endpoint | `src/config/site.ts` → `formspreeEndpoint` or env `VITE_FORMSPREE_ENDPOINT` |
+| Contact submit | Opens WhatsApp (`wa.me/919760003398`) + `mailto:maazkhanforbusiness@gmail.com` |
 | Social URLs | `src/config/site.ts` → `socials[].href` |
 | Copy | `src/config/content.ts` (sourced from the brief) |
 

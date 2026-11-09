@@ -2,10 +2,8 @@
  * Site settings — wire real assets here.
  *
  * Showreel: set `showreel.src` to a YouTube watch/share URL or an MP4/WebM URL.
- * Formspree: create a form for maazkhanforbusiness@gmail.com, then set
- * `formspreeEndpoint` or env `VITE_FORMSPREE_ENDPOINT` to
- * `https://formspree.io/f/xxxxxxxx`.
  * Socials: set `href` when real profile URLs exist.
+ * Contact form opens WhatsApp + mailto until a server endpoint is wired.
  */
 export const site = {
   name: 'Maaz Khan',
@@ -14,9 +12,7 @@ export const site = {
   phoneDisplay: '+91 97600 03398',
   phoneTel: '+919760003398',
   whatsappUrl: 'https://wa.me/919760003398',
-  formspreeEndpoint:
-    (import.meta.env.VITE_FORMSPREE_ENDPOINT as string | undefined)?.trim() ||
-    null,
+
   showreel: {
     src: 'https://youtu.be/o9yZh-4qEwo' as string | null,
     poster: null as string | null,
