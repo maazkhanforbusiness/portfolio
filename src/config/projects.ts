@@ -46,8 +46,8 @@ export const projects: Project[] = [
     year: '—',
     contribution: 'Edit, colour grading, transitions',
     tools: ['Adobe Premiere Pro', 'Adobe After Effects'],
-    videoUrl: null,
-    thumbnail: null,
+    videoUrl: 'https://youtu.be/cq43me-Y1RU',
+    thumbnail: 'https://i.ytimg.com/vi/cq43me-Y1RU/hqdefault.jpg',
   },
   {
     id: 'ai-promo-01',
