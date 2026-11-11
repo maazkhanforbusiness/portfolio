@@ -10,6 +10,7 @@ export const site = {
   title: 'Maaz Khan — Video Editor | Social Media Manager | Creative Professional',
   email: 'maazkhanforbusiness@gmail.com',
   whatsappUrl: 'https://wa.me/919760003398',
+  portrait: `${import.meta.env.BASE_URL}maaz-portrait.png`,
 
   showreel: {
     src: 'https://youtu.be/o9yZh-4qEwo' as string | null,

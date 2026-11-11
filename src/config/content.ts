@@ -169,7 +169,7 @@ export const aboutSection = {
     'YouTube thumbnails and promotional creatives',
     'Remote client collaboration',
   ],
-  portraitNote: 'Portrait coming soon',
+  portraitAlt: 'Portrait of Maaz Khan',
 }
 
 export const experienceSection = {

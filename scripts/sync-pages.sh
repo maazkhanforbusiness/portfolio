@@ -15,6 +15,7 @@ cp -R dist/assets assets
 cp dist/index.html index.html
 cp dist/favicon.svg favicon.svg
 cp dist/icons.svg icons.svg
+cp dist/maaz-portrait.png maaz-portrait.png
 touch .nojekyll
 
 if grep -q 'src/main.tsx' index.html; then
@@ -22,4 +23,9 @@ if grep -q 'src/main.tsx' index.html; then
   exit 1
 fi
 
-echo "sync-pages: published dist → repo root (index.html, assets/, favicon.svg)"
+if [[ ! -f maaz-portrait.png ]]; then
+  echo "sync-pages: maaz-portrait.png missing from published root" >&2
+  exit 1
+fi
+
+echo "sync-pages: published dist → repo root (index.html, assets/, favicon.svg, maaz-portrait.png)"

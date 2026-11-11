@@ -1,4 +1,5 @@
 import { aboutSection } from '../config/content'
+import { site } from '../config/site'
 
 export function About() {
   return (
@@ -20,9 +21,16 @@ export function About() {
             ))}
           </ul>
         </div>
-        <div className="about-portrait" aria-label={aboutSection.portraitNote}>
-          <div className="portrait-frame">
-            <span>{aboutSection.portraitNote}</span>
+        <div className="about-portrait">
+          <div className="portrait-frame has-photo">
+            <img
+              src={site.portrait}
+              alt={aboutSection.portraitAlt}
+              width={1155}
+              height={1362}
+              loading="lazy"
+              decoding="async"
+            />
           </div>
         </div>
       </div>
