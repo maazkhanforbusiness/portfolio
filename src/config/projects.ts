@@ -62,14 +62,14 @@ export const projects: Project[] = [
   },
   {
     id: 'short-format-01',
-    title: 'Social Reels Pack',
+    title: 'Social Reel Pack',
     category: 'Short Format',
     description: 'Vertical short-form cuts built around hooks, captions, and retention pacing.',
     year: '—',
     contribution: 'Short-form edit, captions, hooks',
     tools: ['Adobe Premiere Pro', 'CapCut'],
-    videoUrl: null,
-    thumbnail: null,
+    videoUrl: 'https://youtu.be/B8oZTuRkytU',
+    thumbnail: 'https://i.ytimg.com/vi/B8oZTuRkytU/hqdefault.jpg',
   },
   {
     id: 'short-format-02',
