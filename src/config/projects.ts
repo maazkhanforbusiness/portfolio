@@ -57,8 +57,8 @@ export const projects: Project[] = [
     year: '—',
     contribution: 'Edit, motion graphics, storytelling',
     tools: ['Adobe After Effects', 'Adobe Premiere Pro'],
-    videoUrl: null,
-    thumbnail: null,
+    videoUrl: 'https://youtu.be/c0OlFLCP3qw',
+    thumbnail: 'https://i.ytimg.com/vi/c0OlFLCP3qw/hqdefault.jpg',
   },
   {
     id: 'short-format-01',
