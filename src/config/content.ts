@@ -39,13 +39,7 @@ export const showreelSection = {
 export const workSection = {
   eyebrow: 'Selected Work',
   title: 'Selected cuts across formats.',
-  categories: [
-    'Talking Head',
-    'Real Estate',
-    'AI Promo',
-    'Long Format',
-    'Short Format',
-  ] as const,
+  categories: ['Short Format', 'AI Promo', 'Talking Head'] as const,
 }
 
 export const servicesSection = {

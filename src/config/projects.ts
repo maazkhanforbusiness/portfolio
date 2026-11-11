@@ -5,12 +5,7 @@
  * Leave `videoUrl` / `thumbnail` as null for “coming soon” placeholders.
  * Do not invent real client names or footage URLs.
  */
-export type ProjectCategory =
-  | 'Talking Head'
-  | 'Real Estate'
-  | 'AI Promo'
-  | 'Long Format'
-  | 'Short Format'
+export type ProjectCategory = 'Short Format' | 'AI Promo' | 'Talking Head'
 
 export type Project = {
   id: string
@@ -28,26 +23,15 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    id: 'talking-head-01',
-    title: 'Talking Head',
-    category: 'Talking Head',
-    description: 'Jump cuts, dynamic captions, and paced storytelling for on-camera creators.',
+    id: 'short-format-01',
+    title: 'Social Reel Pack',
+    category: 'Short Format',
+    description: 'Vertical short-form cuts built around hooks, captions, and retention pacing.',
     year: '—',
-    contribution: 'Editing, captions, sound design',
-    tools: ['Adobe Premiere Pro', 'Adobe Audition'],
-    videoUrl: 'https://youtu.be/9xTF_0iLPbo',
-    thumbnail: 'https://i.ytimg.com/vi/9xTF_0iLPbo/hqdefault.jpg',
-  },
-  {
-    id: 'real-estate-01',
-    title: 'Property Showcase',
-    category: 'Real Estate',
-    description: 'Cinematic walkthroughs with colour grade, transitions, and spatial pacing.',
-    year: '—',
-    contribution: 'Edit, colour grading, transitions',
-    tools: ['Adobe Premiere Pro', 'Adobe After Effects'],
-    videoUrl: 'https://youtu.be/cq43me-Y1RU',
-    thumbnail: 'https://i.ytimg.com/vi/cq43me-Y1RU/hqdefault.jpg',
+    contribution: 'Short-form edit, captions, hooks',
+    tools: ['Adobe Premiere Pro', 'CapCut'],
+    videoUrl: 'https://youtu.be/B8oZTuRkytU',
+    thumbnail: 'https://i.ytimg.com/vi/B8oZTuRkytU/hqdefault.jpg',
   },
   {
     id: 'ai-promo-01',
@@ -61,26 +45,15 @@ export const projects: Project[] = [
     thumbnail: 'https://i.ytimg.com/vi/c0OlFLCP3qw/hqdefault.jpg',
   },
   {
-    id: 'short-format-01',
-    title: 'Social Reel Pack',
-    category: 'Short Format',
-    description: 'Vertical short-form cuts built around hooks, captions, and retention pacing.',
+    id: 'talking-head-01',
+    title: 'Talking Head',
+    category: 'Talking Head',
+    description: 'Jump cuts, dynamic captions, and paced storytelling for on-camera creators.',
     year: '—',
-    contribution: 'Short-form edit, captions, hooks',
-    tools: ['Adobe Premiere Pro', 'CapCut'],
-    videoUrl: 'https://youtu.be/B8oZTuRkytU',
-    thumbnail: 'https://i.ytimg.com/vi/B8oZTuRkytU/hqdefault.jpg',
-  },
-  {
-    id: 'short-format-02',
-    title: 'Lifestyle Cutdowns',
-    category: 'Short Format',
-    description: 'Story-driven short cuts with music sync, colour, and smooth transitions.',
-    year: '—',
-    contribution: 'Story edit, colour, sound design',
-    tools: ['Adobe Premiere Pro', 'DaVinci Resolve'],
-    videoUrl: null,
-    thumbnail: null,
+    contribution: 'Editing, captions, sound design',
+    tools: ['Adobe Premiere Pro', 'Adobe Audition'],
+    videoUrl: 'https://youtu.be/9xTF_0iLPbo',
+    thumbnail: 'https://i.ytimg.com/vi/9xTF_0iLPbo/hqdefault.jpg',
   },
 ]
 
