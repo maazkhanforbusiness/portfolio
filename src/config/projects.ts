@@ -5,7 +5,7 @@
  * Leave `videoUrl` / `thumbnail` as null for “coming soon” placeholders.
  * Do not invent real client names or footage URLs.
  */
-export type ProjectCategory = 'Short Format' | 'AI Promo' | 'Talking Head'
+export type ProjectCategory = 'Short Format' | 'AI Promo' | 'Talking Head' | 'Real Estate'
 
 export type Project = {
   id: string
@@ -54,6 +54,17 @@ export const projects: Project[] = [
     tools: ['Adobe Premiere Pro', 'Adobe Audition'],
     videoUrl: 'https://youtu.be/9xTF_0iLPbo',
     thumbnail: 'https://i.ytimg.com/vi/9xTF_0iLPbo/hqdefault.jpg',
+  },
+  {
+    id: 'real-estate-01',
+    title: 'Property Showcase',
+    category: 'Real Estate',
+    description: 'Cinematic walkthroughs with colour grade, transitions, and spatial pacing.',
+    year: '—',
+    contribution: 'Edit, colour grading, transitions',
+    tools: ['Adobe Premiere Pro', 'Adobe After Effects'],
+    videoUrl: 'https://youtu.be/cq43me-Y1RU',
+    thumbnail: 'https://i.ytimg.com/vi/cq43me-Y1RU/hqdefault.jpg',
   },
 ]
 
