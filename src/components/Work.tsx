@@ -1,29 +1,131 @@
-import { useMemo, useState, type MouseEvent, type PointerEvent } from 'react'
+import {
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  type MouseEvent,
+  type PointerEvent,
+} from 'react'
 import { workSection } from '../config/content'
 import { getYoutubeId, projects, type Project, type ProjectCategory } from '../config/projects'
+import { loadYoutubeApi, type YoutubePlayer } from '../lib/youtubeApi'
 import { VideoPlayer } from './VideoPlayer'
 
-function buildSilentEmbed(id: string) {
-  const params = new URLSearchParams({
-    autoplay: '1',
-    mute: '1',
-    controls: '0',
-    modestbranding: '1',
-    rel: '0',
-    playsinline: '1',
-    disablekb: '1',
-    fs: '0',
-    iv_load_policy: '3',
-    loop: '1',
-    playlist: id,
-  })
-  return `https://www.youtube-nocookie.com/embed/${id}?${params.toString()}`
-}
+const previewPlayerVars = {
+  autoplay: 1,
+  controls: 0,
+  modestbranding: 1,
+  rel: 0,
+  playsinline: 1,
+  disablekb: 1,
+  fs: 0,
+  iv_load_policy: 3,
+  loop: 1,
+  enablejsapi: 1,
+} as const
 
-function WorkThumb({ project }: { project: Project }) {
+function WorkThumb({
+  project,
+  muted,
+  onMutedChange,
+}: {
+  project: Project
+  muted: boolean
+  onMutedChange: (muted: boolean) => void
+}) {
   const [playing, setPlaying] = useState(false)
+  const mountRef = useRef<HTMLDivElement>(null)
+  const playerRef = useRef<YoutubePlayer | null>(null)
+  const mutedRef = useRef(muted)
   const yt = getYoutubeId(project.videoUrl)
   const canPlay = Boolean(yt)
+
+  useEffect(() => {
+    mutedRef.current = muted
+  }, [muted])
+
+  useEffect(() => {
+    if (!playing || !yt || !mountRef.current) return
+
+    let cancelled = false
+    let player: YoutubePlayer | null = null
+    const host = mountRef.current
+
+    const applyMute = (target: YoutubePlayer, nextMuted: boolean) => {
+      if (nextMuted) target.mute()
+      else {
+        target.unMute()
+        target.setVolume(100)
+      }
+    }
+
+    void loadYoutubeApi()
+      .then((YT) => {
+        if (cancelled || !host.isConnected) return
+
+        player = new YT.Player(host, {
+          videoId: yt,
+          width: '100%',
+          height: '100%',
+          playerVars: {
+            ...previewPlayerVars,
+            playlist: yt,
+            // Start muted so autoplay is allowed; unmute immediately if preferred.
+            mute: 1,
+            origin: window.location.origin,
+          },
+          events: {
+            onReady: (event) => {
+              if (cancelled) return
+              playerRef.current = event.target
+              applyMute(event.target, mutedRef.current)
+              event.target.playVideo()
+
+              // If unmuted autoplay is blocked, keep playing muted until the user toggles.
+              window.setTimeout(() => {
+                if (cancelled || mutedRef.current) return
+                try {
+                  applyMute(event.target, false)
+                  event.target.playVideo()
+                } catch {
+                  /* ignore */
+                }
+              }, 120)
+            },
+          },
+        })
+        playerRef.current = player
+      })
+      .catch(() => {
+        /* Preview unavailable without the API */
+      })
+
+    return () => {
+      cancelled = true
+      playerRef.current = null
+      try {
+        player?.destroy()
+      } catch {
+        /* ignore */
+      }
+      host.replaceChildren()
+    }
+  }, [playing, yt])
+
+  useEffect(() => {
+    const player = playerRef.current
+    if (!playing || !player) return
+    try {
+      if (muted) player.mute()
+      else {
+        player.unMute()
+        player.setVolume(100)
+        player.playVideo()
+      }
+    } catch {
+      /* ignore */
+    }
+  }, [muted, playing])
 
   const start = () => {
     if (!canPlay) return
@@ -49,6 +151,12 @@ function WorkThumb({ project }: { project: Project }) {
     setPlaying((current) => !current)
   }
 
+  const onMuteToggle = (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault()
+    e.stopPropagation()
+    onMutedChange(!muted)
+  }
+
   return (
     <div
       className={`work-thumb${playing ? ' is-playing' : ''}`}
@@ -70,12 +178,7 @@ function WorkThumb({ project }: { project: Project }) {
 
       {playing && yt && (
         <div className="work-thumb-player" aria-hidden="true">
-          <iframe
-            title={`${project.title} preview`}
-            src={buildSilentEmbed(yt)}
-            allow="autoplay; encrypted-media; picture-in-picture"
-            tabIndex={-1}
-          />
+          <div ref={mountRef} className="work-thumb-player-host" />
         </div>
       )}
 
@@ -88,6 +191,18 @@ function WorkThumb({ project }: { project: Project }) {
           aria-label={playing ? `Stop ${project.title} preview` : `Play ${project.title} preview`}
         />
       )}
+
+      {canPlay && playing && (
+        <button
+          type="button"
+          className="work-mute"
+          onClick={onMuteToggle}
+          aria-pressed={!muted}
+          aria-label={muted ? 'Unmute preview' : 'Mute preview'}
+        >
+          <span aria-hidden="true">{muted ? 'Unmute' : 'Mute'}</span>
+        </button>
+      )}
     </div>
   )
 }
@@ -95,6 +210,8 @@ function WorkThumb({ project }: { project: Project }) {
 export function Work() {
   const [filter, setFilter] = useState<ProjectCategory | null>(null)
   const [active, setActive] = useState<Project | null>(null)
+  // Session preference: unmuted by default while the page stays open.
+  const [previewMuted, setPreviewMuted] = useState(false)
 
   const filtered = useMemo(() => {
     if (!filter) return projects
@@ -128,7 +245,11 @@ export function Work() {
           {filtered.map((project) => (
             <li key={project.id} className="work-item">
               <article className="work-card">
-                <WorkThumb project={project} />
+                <WorkThumb
+                  project={project}
+                  muted={previewMuted}
+                  onMutedChange={setPreviewMuted}
+                />
                 <button
                   type="button"
                   className="work-meta"

@@ -542,6 +542,7 @@
   background: #000;
 }
 
+.work-thumb-player-host,
 .work-thumb-player iframe {
   position: absolute;
   inset: 0;
@@ -561,6 +562,25 @@
   margin: 0;
   background: transparent;
   cursor: pointer;
+}
+
+.work-mute {
+  position: absolute;
+  right: 0.65rem;
+  bottom: 0.65rem;
+  z-index: 2;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: rgba(16, 16, 16, 0.72);
+  color: #fff;
+  padding: 0.4rem 0.65rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.work-mute:hover {
+  background: rgba(16, 16, 16, 0.9);
 }
 
 @media (hover: hover) and (pointer: fine) {
