@@ -31,6 +31,7 @@ export type YoutubePlayer = {
   unMute: () => void
   isMuted: () => boolean
   setVolume: (volume: number) => void
+  getPlayerState: () => number
   destroy: () => void
 }
 
