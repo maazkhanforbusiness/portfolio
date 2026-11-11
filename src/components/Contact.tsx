@@ -117,21 +117,6 @@ export function Contact() {
             >
               WhatsApp
             </a>
-            <ul className="social-list">
-              {site.socials.map((s) =>
-                s.href ? (
-                  <li key={s.id}>
-                    <a href={s.href} target="_blank" rel="noopener noreferrer">
-                      {s.label}
-                    </a>
-                  </li>
-                ) : (
-                  <li key={s.id} className="is-placeholder">
-                    {s.label} <span>(link coming soon)</span>
-                  </li>
-                ),
-              )}
-            </ul>
           </div>
         </header>
 

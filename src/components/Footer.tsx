@@ -14,17 +14,6 @@ export function Footer() {
           <a href={site.whatsappUrl} target="_blank" rel="noopener noreferrer">
             WhatsApp
           </a>
-          {site.socials.map((s) =>
-            s.href ? (
-              <a key={s.id} href={s.href} target="_blank" rel="noopener noreferrer">
-                {s.label}
-              </a>
-            ) : (
-              <span key={s.id} className="is-placeholder">
-                {s.label}
-              </span>
-            ),
-          )}
         </div>
         <div className="footer-meta">
           <p>
