@@ -47,9 +47,10 @@ export const servicesSection = {
   title: 'Creative editing for every kind of story.',
   items: [
     {
-      num: '01',
+      id: 'talking-head',
       title: 'Talking Head Video Editing',
       for: 'For YouTubers, personal brands, educators, coaches, and businesses.',
+      youtubeId: '9xTF_0iLPbo',
       includes: [
         'Jump cuts',
         'Dynamic captions',
@@ -60,9 +61,10 @@ export const servicesSection = {
       ],
     },
     {
-      num: '02',
+      id: 'real-estate',
       title: 'Real Estate Video Editing',
       for: 'For real estate agencies, property marketers, and property professionals.',
+      youtubeId: 'cq43me-Y1RU',
       includes: [
         'Luxury property showcases',
         'Property walkthroughs',
@@ -73,9 +75,10 @@ export const servicesSection = {
       ],
     },
     {
-      num: '03',
+      id: 'podcast',
       title: 'Podcast Editing',
       for: 'For podcasters, creators, and businesses.',
+      youtubeId: null,
       includes: [
         'Full podcast episodes',
         'Multi-camera editing',
@@ -86,9 +89,10 @@ export const servicesSection = {
       ],
     },
     {
-      num: '04',
+      id: 'vlogs-lifestyle',
       title: 'Vlogs & Lifestyle Video Editing',
       for: 'For travel vloggers, lifestyle creators, and YouTubers.',
+      youtubeId: null,
       includes: [
         'Story-driven editing',
         'Cinematic sequences',
@@ -99,9 +103,10 @@ export const servicesSection = {
       ],
     },
     {
-      num: '05',
+      id: 'social-reels',
       title: 'Social Media Reels & Shorts',
       for: 'For influencers, businesses, and personal brands.',
+      youtubeId: 'B8oZTuRkytU',
       includes: [
         'Instagram Reels',
         'YouTube Shorts',
@@ -112,9 +117,10 @@ export const servicesSection = {
       ],
     },
     {
-      num: '06',
+      id: 'commercial-brand',
       title: 'Commercial & Brand Films',
       for: 'For brands and businesses.',
+      youtubeId: null,
       includes: [
         'Brand storytelling',
         'Product videos',
@@ -125,9 +131,10 @@ export const servicesSection = {
       ],
     },
     {
-      num: '07',
+      id: 'ai-promo',
       title: 'AI Promotional Ads',
       for: 'For businesses and brands exploring AI-assisted advertising.',
+      youtubeId: 'c0OlFLCP3qw',
       includes: [
         'AI-generated visuals',
         'AI-assisted product advertisements',
