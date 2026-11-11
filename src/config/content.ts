@@ -216,8 +216,6 @@ export const skillsSection = {
     'Adobe After Effects',
     'Adobe Photoshop',
     'Adobe Audition',
-    'DaVinci Resolve',
-    'Final Cut Pro',
     'CapCut',
   ],
   additional: [
@@ -226,9 +224,7 @@ export const skillsSection = {
     'Audio Editing',
     'Basic Visual Effects',
     'Storytelling',
-    'Content Optimisation',
     'Graphic Design',
-    'Social Media Strategy',
   ],
 }
 
